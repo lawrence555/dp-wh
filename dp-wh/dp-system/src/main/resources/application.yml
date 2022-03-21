@@ -1,0 +1,18 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: dp-system
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.14.4:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 192.168.14.4:8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

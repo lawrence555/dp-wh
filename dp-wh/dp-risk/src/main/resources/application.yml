@@ -1,0 +1,41 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: dp-risk
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.14.4:8848
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 192.168.14.4:8080
+
+  redis:
+    host: ${EUREKA_IP:127.0.0.1}
+    port: 6379
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: -1ms
+        max-idle: 10
+        min-idle: 0
+    timeout: 10000ms
+    connect-timeout: 10000ms
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_IP:192.168.14.4}:3306/double_prevention?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+feign:
+  sentinel:
+    enabled: true
